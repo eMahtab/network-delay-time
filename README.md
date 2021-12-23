@@ -73,3 +73,44 @@ class Solution {
     }
 }
 ```
+
+# Implementation2 : Bellman Ford Algorithm
+```java
+class Solution {
+    public int networkDelayTime(int[][] times, int N, int K) {
+        int[][] edges = new int[times.length][3];
+        for(int i = 0; i < times.length; i++) {
+            edges[i][0] = times[i][0] - 1;
+            edges[i][1] = times[i][1] - 1;
+            edges[i][2] = times[i][2];
+        }
+        Arrays.sort(edges, (e1,e2) -> e1[2] - e2[2]);
+        int[] distances = new int[N];
+        Arrays.fill(distances, Integer.MAX_VALUE);
+        distances[K-1] = 0;
+        int result = 0;
+        for(int i = 0; i < N-1; i++) {
+            for(int j = 0; j < times.length; j++) {
+                int u = edges[j][0];
+                int v = edges[j][1];
+                int time = edges[j][2];
+                if(distances[u] != Integer.MAX_VALUE) {
+                    int dU = distances[u];
+                    int dV = distances[v];
+                    if(dU+time < dV) {
+                        distances[v] = dU + time;
+                    }
+                }
+            }            
+        }
+        
+        for(int i = 0; i < N; i++) {
+            if(distances[i] == Integer.MAX_VALUE)
+                return -1;
+            result = Math.max(result, distances[i]);
+        }
+        
+        return result;
+    }
+}
+```
