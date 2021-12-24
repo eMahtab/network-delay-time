@@ -115,5 +115,34 @@ class Solution {
 }
 ```
 
+# Implementation 3 : Floyd Warshall Algorithm
+```java
+class Solution {
+    public int networkDelayTime(int[][] times, int N, int K) {
+        int[][] matrix = new int[N][N];
+        for(int i = 0; i < N; i++) {
+            Arrays.fill(matrix[i], 100000000);
+            matrix[i][i] = 0;
+        }
+        for(int[] time : times) {
+            matrix[time[0] - 1][time[1] - 1] = time[2];
+        }
+        
+        for(int k = 0; k < N; k++)
+            for(int i = 0; i < N; i++)
+                for(int j = 0; j < N; j++)
+                    matrix[i][j] = Math.min(matrix[i][j], matrix[i][k] + matrix[k][j]);
+    
+        int result = -1;
+        for(int i = 0; i < N; i++) {
+            if(matrix[K-1][i] == 100000000)
+                return -1;
+            result = Math.max(result, matrix[K-1][i]);
+        }
+        return result;
+    }
+}
+```
+
 # References :
 https://www.youtube.com/watch?v=IjEX4rgxsvI (Hindi, Good explanation)
