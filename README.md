@@ -145,4 +145,5 @@ class Solution {
 ```
 
 # References :
-https://www.youtube.com/watch?v=IjEX4rgxsvI (Hindi, Good explanation)
+1. Dijkstra's Algorithm https://www.youtube.com/watch?v=sD0lLYlGCJE (Hindi, good explanation)
+2. Bellman Ford's Algorithm https://www.youtube.com/watch?v=IjEX4rgxsvI (Hindi, good explanation)
